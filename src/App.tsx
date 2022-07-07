@@ -9,25 +9,22 @@ const GET_LESSONS_QUERY = gql`
       title
     }
   }
-`
-
+`;
 interface Lesson {
   id: string;
-  title: string
+  title: string;
 }
 
-
 function App() {
+  const { data } = useQuery<{ lessons: Lesson[] }>(GET_LESSONS_QUERY);
 
-  const { data } = useQuery<{lessons: Lesson[]}>(GET_LESSONS_QUERY);
-  
   return (
     <ul>
-      {data?.lessons.map(lesson => {
-        return <li key={lesson.id}>{lesson.title}</li>
+      {data?.lessons.map((lesson) => {
+        return <li key={lesson.id}>{lesson.title}</li>;
       })}
     </ul>
-  )
+  );
 }
 
 export default App;
